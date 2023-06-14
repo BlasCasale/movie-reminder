@@ -1,0 +1,149 @@
+.nav {
+    display: none;
+}
+
+.btn {
+    border: none;
+    font-size: 20px;
+    width: 28px;
+    height: 28px;
+    border-radius: 20px;
+}
+
+.btnSession {
+    padding: 5px;
+    border: none;
+    border-radius: 15px;
+}
+
+.one {
+    background-color: #8A95A5;
+    color: #ccc;
+    transition: 1s;
+}
+
+.one:hover {
+    background-color: #B9C6AE;
+    color: #090C08;
+}
+
+.two {
+    background-color: #474056;
+    color: #ccc;
+    transition: 1s;
+}
+
+.two:hover {
+    background-color: #090C08;
+}
+
+@media screen and (min-width: 300px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0px;
+        background-color: #474056;
+        width: 100%;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    .link {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 30px;
+    }
+
+    .linkNav {
+        color: black;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .btnSession {
+        background-color: #474056;
+        color: #ccc;
+        transition: 1s;
+    }
+
+    .btnSession:hover {
+        background-color: #090C08;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .open {
+        display: block;
+    }
+
+    .disable {
+        display: none;
+    }
+
+    .navVisible {
+        opacity: 1;
+        visibility: visible;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 10px;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        padding: 1.3rem;
+        background-color: #B9C6AE;
+        box-shadow: 0 0 0 100vmax rgb(0, 0, 0, .5)
+    }
+
+    .active {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 10px;
+        padding: 5px;
+    }
+}
+
+@media screen and (min-width: 551px) {
+    .btn {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .linkNav {
+        color: #ccc;
+        transition: 1s;
+    }
+
+    .linkNav:hover {
+        color: white;
+    }
+
+    .btnSession {
+        background-color: #8A95A5;
+        transition: 1s;
+    }
+
+    .btnSession:hover {
+        background-color: #B9C6AE;
+        color: #090C08;
+    }
+}
+
