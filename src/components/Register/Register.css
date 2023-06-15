@@ -1,0 +1,52 @@
+.negative {
+    color: red;
+    font-size: 19px;
+}
+
+.positive {
+    color: green;
+    font-size: 19px;
+}
+
+legend {
+    color: #474056;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.registerForm {
+    padding: 20px 0px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    background: linear-gradient(360deg, rgba(73, 53, 72, 1) 12%, rgba(75, 78, 109, 1) 70%, rgba(185, 192, 218, 1) 96%);
+}
+
+.inputForm {
+    width: 220px;
+    border: none;
+    padding: 5px;
+    border-radius: 20px;
+    font: 18px;
+}
+
+.btnRegister {
+    border: none;
+    background-color: #ccc;
+    color: #474056;
+    padding: 8px;
+    border-radius: 20px;
+    font-size: 17px;
+    transition: 1s;
+}
+
+.btnRegister:hover {
+    background-color: #fff;
+    color: #090C08;
+    cursor: pointer;
+}

@@ -1,9 +1,12 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { LoginContext } from '../../context/LoginContext.jsx'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
 
 const NavBar = () => {
+
+  const { loged, logoutUser } = useContext(LoginContext)
 
   const open = "open"
 
@@ -28,12 +31,12 @@ const NavBar = () => {
   return (
     <header>
 
-      <Link className='link' to={"/"}>Pelis pedia</Link>
+      <Link className='link' to={"/"}>PelisPedia</Link>
 
       <button className={`${style.buttonOpen} btn one`} onClick={() => openUl()}><i className="bi bi-list"></i></button>
 
       <nav className={style.nav}>
-          <button className={`${style.buttonClose} btn two`} onClick={() => closeUl()}><i className="bi bi-list"></i></button>
+        <button className={`${style.buttonClose} btn two`} onClick={() => closeUl()}><i className="bi bi-list"></i></button>
 
         <ul className={`${style.ul} ul`}>
 
@@ -45,12 +48,21 @@ const NavBar = () => {
             <Link className='link linkNav' to={"/favorites"}>Favoritos</Link>
           </li>
 
-          <li>
-            <Link className='link linkNav'>Iniciar sesión</Link>
-          </li>
-          
-          <button className='btnSession'>Cerrar sesión</button>
-        
+          {
+            !loged &&
+            <>
+              <li>
+                <Link className='link linkNav' to={"/login"}>Iniciar sesión</Link>
+              </li>
+
+              <li>
+                <Link className='link linkNav' to={"/register"}>Registrarse</Link>
+              </li>
+            </>
+          }
+
+          {loged && <button className='btnSession' onClick={() => logoutUser()}>Cerrar sesión</button>}
+
         </ul>
 
       </nav>

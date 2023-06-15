@@ -16,8 +16,7 @@ const MoviesListContainer = () => {
 
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${input}`
 
-    fetch(url)
-    .then(res => res.json())
+    axios.get(url)
     .then(data => {
       const movieArray = data.data.Search
       setMovies(movieArray)
