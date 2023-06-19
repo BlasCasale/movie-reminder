@@ -1,0 +1,20 @@
+.cardUser {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0px;
+    background: linear-gradient(180deg, rgba(73, 53, 72, 1) 12%, rgba(75, 78, 109, 1) 70%, rgba(185, 192, 218, 1) 96%);
+    border: solid 2px #ccc;
+    border-radius: 40px;
+}
+
+.cardUser li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}

@@ -3,6 +3,7 @@ import { useState, useContext } from 'react'
 import { LoginContext } from '../../context/LoginContext.jsx'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
+import AvatarNavBar from '../AvatarNavBar/AvatarNavBar.jsx'
 
 const NavBar = () => {
 
@@ -61,7 +62,7 @@ const NavBar = () => {
             </>
           }
 
-          {loged && <button className='btnSession' onClick={() => logoutUser()}>Cerrar sesión</button>}
+          {loged && <AvatarNavBar logoutUser={logoutUser} loged={loged}/>}
 
         </ul>
 

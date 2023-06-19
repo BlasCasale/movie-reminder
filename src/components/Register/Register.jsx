@@ -8,7 +8,7 @@ const Register = () => {
 
   const [users, setUsers] = useState([])
 
-  const [input, setInput] = useState({ name: "", surname: "", mail: "", pass: "", passCon: "" })
+  const [input, setInput] = useState({ name: "", surname: "", mail: "", pass: "", passCon: "" , img: ""})
 
   const [response, setResponse] = useState("")
 
@@ -64,7 +64,7 @@ const Register = () => {
       setResponse(passDoesntMatch)
       setStyle(negative)
 
-    } else if ((input.pass.valueOf() === input.passCon.valueOf()) && (input.name.trim() && input.surname.trim() && input.pass.trim() && input.passCon.trim() && input.mail.trim())) {
+    } else if ((input.pass.valueOf() === input.passCon.valueOf()) && (input.name.trim() && input.surname.trim() && input.pass.trim() && input.passCon.trim() && input.mail.trim() && input.img.trim())) {
       
       setResponse(confirmResponse)
 
@@ -73,11 +73,14 @@ const Register = () => {
           name: input.name,
           surname: input.surname,
           pass: input.pass,
-          mail: input.mail
+          mail: input.mail,
+          img: input.img,
         }
       })
 
       setStyle(positive)
+
+      setInput({name: "", surname: "", pass: "", passCon: "", mail: "", img: ""})
 
     } else {
 
@@ -99,6 +102,8 @@ const Register = () => {
         <input type="email" placeholder="Mail" value={input.mail} name="mail" onChange={handleInput} className='inputForm' />
         <input type="password" placeholder='Contraseña' value={input.pass} name="pass" onChange={handleInput} className='inputForm' />
         <input type="password" placeholder='Repeti contraseña' value={input.passCon} name="passCon" onChange={handleInput} className='inputForm' />
+        <label htmlFor="avatar">Foto de perfil:</label>
+        <input type="file" id="avatar" value={input.img} name="img" className='inputForm' onChange={handleInput}/>
 
         <button className='btnRegister' type="submit">Enviar</button>
       </form>

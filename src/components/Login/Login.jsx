@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { LoginContext } from '../../context/LoginContext'
 import FormLogin from '../FormLogin/FormLogin'
+import UserInfo from '../UserInfo/UserInfo'
 
 const Login = () => {
 
@@ -9,7 +10,7 @@ const Login = () => {
 
   return (
     <>
-      {loged ? <></> : <FormLogin loginUser={loginUser} />}
+      {loged ? <UserInfo loged={loged} /> : <FormLogin loginUser={loginUser} />}
     </>
   )
 }

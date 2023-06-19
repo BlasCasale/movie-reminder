@@ -53,7 +53,7 @@ const FormLogin = ({loginUser}) => {
         e.preventDefault()
 
         if (findUser(input.mail, input.pass)) {
-            loginUser(input.mail)
+            loginUser(findUser(input.mail, input.pass))
         } else if (!input.mail || !input.pass) {
             setResponse(completeFields)
             setStyle(negative)
@@ -66,11 +66,11 @@ const FormLogin = ({loginUser}) => {
   return (
     <>
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='registerForm'>
         <legend>Inicia sesión:</legend>
         <input type="email" name="mail" placeholder='Ingresa tu mail' value={input.mail} onChange={handleInput} className='inputForm'/>
         <input type="password" name="pass" placeholder='Ingresa tu contraseña' value={input.pass} onChange={handleInput} className='inputForm'/>
-        <button type="submit">Enviar</button>
+        <button type="submit" className='btnRegister'>Enviar</button>
     </form>
     
     {response && <p className={style}>{response}</p>}
