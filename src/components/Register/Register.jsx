@@ -69,13 +69,12 @@ const Register = () => {
       setResponse(confirmResponse)
 
       addDoc(collection(db, "users"), {
-        userData: {
           name: input.name,
           surname: input.surname,
           pass: input.pass,
           mail: input.mail,
           img: input.img,
-        }
+          wishlist: []
       })
 
       setStyle(positive)
@@ -108,7 +107,7 @@ const Register = () => {
         <button className='btnRegister' type="submit">Enviar</button>
       </form>
 
-      <p className={style}>{response}</p>
+      {response && <p className={style}>{response}</p>}
 
     </>
   )

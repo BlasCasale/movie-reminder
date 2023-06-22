@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar/NavBar"
 import { LoginProvider } from './context/LoginContext.jsx'
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
+import Favorites from "./components/Favorites/Favorites"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<MoviesListContainer />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </LoginProvider>
       </BrowserRouter>

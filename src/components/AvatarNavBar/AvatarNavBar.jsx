@@ -2,14 +2,13 @@ import React from 'react'
 import './AvatarNavBar.css'
 
 const AvatarNavBar = ({ logoutUser, loged }) => {
-    const userData = loged.userData
 
     return (
         <>
             <div className='boxAvatar'>
-                <img src={userData.img} alt={userData.name} className='avatarImg' />
+                <img src={loged.img} alt={loged.name} className='avatarImg' />
 
-                <h3 className='avatarName'>{userData.name}</h3>
+                <h3 className='avatarName'>{loged.name}</h3>
 
             </div>
 

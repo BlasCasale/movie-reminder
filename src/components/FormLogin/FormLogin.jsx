@@ -29,7 +29,7 @@ const FormLogin = ({loginUser}) => {
     }
 
     const findUser = (mail, pass) => {
-        return users.find((user) => user.userData.mail == mail && user.userData.pass == pass)
+        return users.find((user) => user.mail == mail && user.pass == pass)
     }
 
     useEffect(() => {

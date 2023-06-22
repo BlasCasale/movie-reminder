@@ -1,5 +1,0 @@
-negro #090C08
-violeta ingles #474056
-gris violeta #757083
-gris cadete #8A95A5
-gris ceniza #B9C6AE

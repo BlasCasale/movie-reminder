@@ -32,7 +32,7 @@ const NavBar = () => {
   return (
     <header>
 
-      <Link className='link' to={"/"}>PelisPedia</Link>
+      <Link className='link' to={"/"}>Pelis{"Pedia" }</Link>
 
       <button className={`${style.buttonOpen} btn one`} onClick={() => openUl()}><i className="bi bi-list"></i></button>
 
@@ -43,10 +43,6 @@ const NavBar = () => {
 
           <li>
             <Link className='link linkNav' to={"/"}>Inicio</Link>
-          </li>
-
-          <li>
-            <Link className='link linkNav' to={"/favorites"}>Favoritos</Link>
           </li>
 
           {
@@ -62,7 +58,16 @@ const NavBar = () => {
             </>
           }
 
-          {loged && <AvatarNavBar logoutUser={logoutUser} loged={loged}/>}
+          {loged && <>
+
+            <li>
+              <Link className='link linkNav' to={"/favorites"}>Favoritos</Link>
+            </li>
+
+            <AvatarNavBar logoutUser={logoutUser} loged={loged} />
+
+          </>
+          }
 
         </ul>
 

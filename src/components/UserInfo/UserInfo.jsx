@@ -6,18 +6,19 @@ import './UserInfo.css'
 
 const UserInfo = ({ loged }) => {
 
-
     const [input, setInput] = useState({ pass: "", passChange: "", passChangeCon: "" })
 
     const [shown, setShown] = useState(false)
+
+    const [style, setStyle] = useState("")
 
     const [response, setResponse] = useState("")
 
     const [users, setUsers] = useState([])
 
-    console.log(users)
+    const negative = "negative"
 
-    const userData = loged.userData
+    const positive = "positive"
 
     const confirmation = "✔ Su contraseña ha sido actualizada"
 
@@ -33,7 +34,7 @@ const UserInfo = ({ loged }) => {
         const modify = onSnapshot(q, function (querySnapshot) {
             const docs = []
             querySnapshot.forEach(function (doc) {
-                docs.push({ userData: { id: doc.id, ...doc.data() } })
+                docs.push({ id: doc.id, ...doc.data() })
             })
             setUsers(docs)
         })
@@ -52,22 +53,36 @@ const UserInfo = ({ loged }) => {
         })
     }
 
-    const changePass = (id, pass, passChange, passChangeCon) => {
+    const changePass = (mail, pass, passChange, passChangeCon) => {
+        const user = users.find(user => user.mail === mail)
+        const id = user.id
 
+        const userRef = doc(db, "users", id)
+
+        if (input.pass.trim() && input.passChange.trim() && input.passChangeCon.trim() && passChange === passChangeCon && pass === user.pass) {
+            updateDoc(userRef, { pass: passChange })
+                .then(() => {
+                    setStyle(positive)
+                    setResponse(confirmation)
+                    setInput({ pass: "", passChange: "", passChangeCon: "" })
+                })
+                .catch(error => console.log(error))
+        } else if (!input.pass || !input.passChange || !input.passChangeCon) {
+            setStyle(negative)
+            setResponse(completeFields)
+        } else if (input.passChange != input.passChangeCon) {
+            setStyle(negative)
+            setResponse(passDoesntMatch)
+        } else if (input.pass != loged.pass){
+            setStyle(negative)
+            setResponse(actualPass)
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const userRef = doc(db, "users", loged.id)
-        const user = users.find(user => user.userData.id === loged.id)
-
-
-        if (input.passChange == input.passChangeCon && input.pass == user.userData.pass) {
-            updateDoc(userRef, { userData: { pass: input.passChange } })
-                .then(() => setResponse(confirmation))
-                .catch(error => console.log(error))
-        }
+        changePass(loged.mail, input.pass, input.passChange, input.passChangeCon)
     }
 
     return (
@@ -75,19 +90,19 @@ const UserInfo = ({ loged }) => {
             <ul className='cardUser'>
                 <li>
                     <label htmlFor="name">Nombre:</label>
-                    <input type="text" id="name" readOnly value={userData.name} className='inputForm' />
+                    <input type="text" id="name" readOnly value={loged.name} className='inputForm' />
                 </li>
                 <li>
                     <label htmlFor="surname">Apellido:</label>
-                    <input type="text" id='surname' readOnly value={userData.surname} className='inputForm' />
+                    <input type="text" id='surname' readOnly value={loged.surname} className='inputForm' />
                 </li>
                 <li>
                     <label htmlFor="mail">Mail:</label>
-                    <input type="email" name="mail" id="mail" readOnly value={userData.mail} className='inputForm' />
+                    <input type="email" name="mail" id="mail" readOnly value={loged.mail} className='inputForm' />
                 </li>
                 <li>
                     <label htmlFor="pass">Contraseña:</label>
-                    <input type={shown ? "text" : "password"} id='pass' name='pass' className='inputForm' value={userData.pass} readOnly />
+                    <input type={shown ? "text" : "password"} id='pass' name='pass' className='inputForm' value={loged.pass} readOnly />
                     <button onClick={() => switchShown()} className='btnRegister'>{shown ? "Ocultar" : "Mostrar"}</button>
                 </li>
             </ul>
@@ -100,7 +115,7 @@ const UserInfo = ({ loged }) => {
                 <button type="submit">Cambiar</button>
             </form>
 
-            {response}
+            {response && <p className={style}>{response}</p>}
         </>
     )
 }
