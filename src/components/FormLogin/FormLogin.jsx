@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import {collection, getDocs} from 'firebase/firestore'
-import {db} from '../../service/config'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../service/config'
 
-const FormLogin = ({loginUser}) => {
+const FormLogin = ({ loginUser }) => {
 
-    const [input, setInput] = useState({mail: "", pass: ""})
+    const [input, setInput] = useState({ mail: "", pass: "" })
 
     const [users, setUsers] = useState([])
 
@@ -36,17 +36,17 @@ const FormLogin = ({loginUser}) => {
         const myUsers = collection(db, "users")
 
         getDocs(myUsers)
-        .then(user => {
-            const newUser = user.docs.map(client => {
-                const data = client.data()
-                return {...data}
+            .then(user => {
+                const newUser = user.docs.map(client => {
+                    const data = client.data()
+                    return { ...data }
+                })
+                setUsers(newUser)
             })
-            setUsers(newUser)
-        })
-        .catch(error => {
-            setResponse(error404)
-            setStyle(negative)
-        })
+            .catch(error => {
+                setResponse(error404)
+                setStyle(negative)
+            })
     })
 
     const handleSubmit = (e) => {
@@ -63,19 +63,19 @@ const FormLogin = ({loginUser}) => {
         }
     }
 
-  return (
-    <>
+    return (
+        <>
 
-    <form onSubmit={handleSubmit} className='registerForm'>
-        <legend>Inicia sesión:</legend>
-        <input type="email" name="mail" placeholder='Ingresa tu mail' value={input.mail} onChange={handleInput} className='inputForm'/>
-        <input type="password" name="pass" placeholder='Ingresa tu contraseña' value={input.pass} onChange={handleInput} className='inputForm'/>
-        <button type="submit" className='btnRegister'>Enviar</button>
-    </form>
-    
-    {response && <p className={style}>{response}</p>}
-    </>
-  )
+            <form onSubmit={handleSubmit} className='registerForm'>
+                <legend>Inicia sesión:</legend>
+                <input type="email" name="mail" placeholder='Ingresa tu mail' value={input.mail} onChange={handleInput} className='inputForm' />
+                <input type="password" name="pass" placeholder='Ingresa tu contraseña' value={input.pass} onChange={handleInput} className='inputForm' />
+                <button type="submit" className='btnRegister'>Enviar</button>
+            </form>
+
+            {response && <p className={style}>{response}</p>}
+        </>
+    )
 }
 
 export default FormLogin

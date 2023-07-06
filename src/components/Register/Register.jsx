@@ -74,7 +74,7 @@ const Register = () => {
           pass: input.pass,
           mail: input.mail,
           img: input.img,
-          wishlist: []
+          like: []
       })
 
       setStyle(positive)

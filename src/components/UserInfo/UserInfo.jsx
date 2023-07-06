@@ -73,7 +73,7 @@ const UserInfo = ({ loged }) => {
         } else if (input.passChange != input.passChangeCon) {
             setStyle(negative)
             setResponse(passDoesntMatch)
-        } else if (input.pass != loged.pass){
+        } else if (input.pass != loged.pass) {
             setStyle(negative)
             setResponse(actualPass)
         }
