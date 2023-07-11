@@ -5,7 +5,6 @@ import { LoginProvider } from './context/LoginContext.jsx'
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
 import Favorites from "./components/Favorites/Favorites"
-import UserInfo from "./components/UserInfo/UserInfo"
 
 function App() {
 
@@ -19,7 +18,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/userInfo" element={<UserInfo />} />
           </Routes>
         </LoginProvider>
       </BrowserRouter>

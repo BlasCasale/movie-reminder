@@ -61,7 +61,7 @@ const NavBar = () => {
           {loged && <>
 
             <li>
-              <Link className='link linkNav' to={"/userInfo"}>Perfil</Link>
+              <Link className='link linkNav' to={"/login"}>Perfil</Link>
             </li>
 
             <li>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { LoginContext } from '../../context/LoginContext'
 import { db } from '../../service/config'
 import { collection, doc, updateDoc, query, onSnapshot } from 'firebase/firestore'
 import './UserInfo.css'

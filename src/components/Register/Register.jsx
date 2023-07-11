@@ -44,7 +44,7 @@ const Register = () => {
         })
         setUsers(newUser)
       })
-      .catch(error => console.log(error))
+      .catch(() => setResponse(somethingGoesWrong))
   }, [])
 
   const compareUser = (mail) => {

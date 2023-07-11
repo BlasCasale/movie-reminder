@@ -8,8 +8,6 @@ const Login = () => {
 
   const { loged, loginUser } = useContext(LoginContext)
 
-  console.log(loged);
-
   return (
     <>
       {loged ? <UserInfo loged={loged} /> : <FormLogin loginUser={loginUser} />}
