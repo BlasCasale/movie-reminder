@@ -1,0 +1,18 @@
+.favoritesBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.btnOrder {
+    background-color: #474056;
+    color: #ccc;
+    transition: 1s;
+}
+
+.btnOrder:hover {
+    background-color: #090C08;
+    color: #fafafa;
+}

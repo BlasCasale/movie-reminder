@@ -13,19 +13,19 @@ const MoviesList = ({ movies }) => {
   const { loged } = useContext(LoginContext)
 
   useEffect(() => {
-      const q = query(collection(db, "users"))
-
-      const modify = onSnapshot(q, function (querySnapshot) {
-        const docs = []
-        querySnapshot.forEach(function (doc) {
-          docs.push({ id: doc.id, ...doc.data() })
-        })
-        setUsers(docs)
+    const q = query(collection(db, "users"))
+    
+    const modify = onSnapshot(q, function (querySnapshot) {
+      const docs = []
+      querySnapshot.forEach(function (doc) {
+        docs.push({ id: doc.id, ...doc.data() })
       })
-
-      return () => {
-        modify()
-      }
+      return setUsers(docs)
+    })
+    
+    return () => {
+      modify()
+    }
   }, [])
 
   const quitLike = (imdbID, user, userRef) => {
@@ -66,7 +66,7 @@ const MoviesList = ({ movies }) => {
 
   return (
     <main className='layout'>
-      {movies != undefined ? movies.map(item => <Movie key={item.imdbID} {...item} loged={loged} evaluateLike={evaluateLike} users={users} />) : <h2>Esa película no esta disponible. Intente con otra.</h2>}
+      {movies != undefined ? movies.map(movie => <Movie key={movie.imdbID} {...movie} loged={loged} evaluateLike={evaluateLike} users={users} />) : <h2>Esa película no esta disponible. Intente con otra.</h2>}
     </main>
   )
 }

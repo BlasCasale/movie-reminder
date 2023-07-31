@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import MovieList from '../MovieList/MovieList'
-import axios from 'axios'
+import { getMovies } from '../../service/movie'
 import './MovieListContainer.css'
 
 const MoviesListContainer = () => {
@@ -10,26 +10,17 @@ const MoviesListContainer = () => {
 
   const [input, setInput] = useState("")
 
-  const apiKey = `dc2ddbc3`
-  
   useEffect(() => {
-
-    const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${input}`
-
-    axios.get(url)
-    .then(data => {
-      const movieArray = data.data.Search
-      setMovies(movieArray)
-    })
-
+    getMovies(input)
+      .then((movie) => setMovies(movie))
   }, [input])
 
   return (
     <>
-      <input type="text" name='input' onChange={(e) => setInput(e.target.value)} className='inputSearch'/>
+      <input type="text" name='input' onChange={(e) => setInput(e.target.value)} className='inputSearch' />
 
-      <MovieList movies={movies}/>
-    
+      {input ? <MovieList movies={movies} /> : <h2>Ingrese el título que desea buscar</h2>}
+
     </>
   )
 }

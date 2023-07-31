@@ -12,14 +12,17 @@ const Movie = ({ Poster, Title, Type, Year, loged, evaluateLike, imdbID, users }
   const red = "red"
 
   const putStyle = () => {
-    const user = users.find(user => user.mail === loged.mail)
 
-    const findMovie = user.like.find(movie => movie.imdbID === imdbID)
-
-    if (findMovie) {
-      return setStyle(red)
-    } else {
-      return setStyle(black)
+    if (loged){
+      const user = users.find(user => user.mail === loged.mail)
+  
+      const findMovie = user.like.find(movie => movie.imdbID === imdbID)
+  
+      if (findMovie) {
+        return setStyle(red)
+      } else {
+        return setStyle(black)
+      }
     }
   }
 

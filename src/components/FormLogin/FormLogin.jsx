@@ -43,7 +43,7 @@ const FormLogin = ({ loginUser }) => {
                 })
                 setUsers(newUser)
             })
-            .catch(error => {
+            .catch(() => {
                 setResponse(error404)
                 setStyle(negative)
             })
