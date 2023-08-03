@@ -1,25 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../../service/config'
+import { useState } from 'react'
+import { useUsers } from '../../hooks/useUsers'
 
 const FormLogin = ({ loginUser }) => {
 
     const [input, setInput] = useState({ mail: "", pass: "" })
-
-    const [users, setUsers] = useState([])
-
-    const [style, setStyle] = useState("")
-
-    const [response, setResponse] = useState("")
-
-    const error404 = "❌ No se ha podido recuperar la informacion"
-
-    const denied = "❌ El mail y la contraseña no coinciden, intente nuevamente."
-
-    const completeFields = "❌ Por favor complete todos los campos."
-
-    const negative = "negative"
 
     const handleInput = (e) => {
         setInput({
@@ -28,26 +13,19 @@ const FormLogin = ({ loginUser }) => {
         })
     }
 
+    const [error, setError] = useState("")
+
+    const denied = "❌ El mail y la contraseña no coinciden, intente nuevamente."
+
+    const completeFields = "❌ Por favor complete todos los campos."
+
+    const negative = "negative"
+
+    const { style, users, response } = useUsers()
+
     const findUser = (mail, pass) => {
         return users.find((user) => user.mail == mail && user.pass == pass)
     }
-
-    useEffect(() => {
-        const myUsers = collection(db, "users")
-
-        getDocs(myUsers)
-            .then(user => {
-                const newUser = user.docs.map(client => {
-                    const data = client.data()
-                    return { ...data }
-                })
-                setUsers(newUser)
-            })
-            .catch(() => {
-                setResponse(error404)
-                setStyle(negative)
-            })
-    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -55,17 +33,16 @@ const FormLogin = ({ loginUser }) => {
         if (findUser(input.mail, input.pass)) {
             loginUser(findUser(input.mail, input.pass))
         } else if (!input.mail || !input.pass) {
-            setResponse(completeFields)
+            setError(completeFields)
             setStyle(negative)
         } else {
-            setResponse(denied)
+            setError(denied)
             setStyle(negative)
         }
     }
 
     return (
         <>
-
             <form onSubmit={handleSubmit} className='registerForm'>
                 <legend>Inicia sesión:</legend>
                 <input type="email" name="mail" placeholder='Ingresa tu mail' value={input.mail} onChange={handleInput} className='inputForm' />
@@ -73,7 +50,9 @@ const FormLogin = ({ loginUser }) => {
                 <button type="submit" className='btnRegister'>Enviar</button>
             </form>
 
-            {response && <p className={style}>{response}</p>}
+            <p className={style}>{error}</p>
+
+            <p className={style}>{response}</p>
         </>
     )
 }

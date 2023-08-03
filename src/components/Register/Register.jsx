@@ -1,30 +1,20 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { getDocs, collection, addDoc } from 'firebase/firestore'
+import { useState } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../../service/config'
 import './Register.css'
+import { useUsers } from '../../hooks/useUsers'
+import { positive, negative, alreadyExist, passDoesntMatch, confirmResponse } from '../../utils/consts'
 
 const Register = () => {
 
-  const [users, setUsers] = useState([])
+  const { users, style, response } = useUsers()
 
   const [input, setInput] = useState({ name: "", surname: "", mail: "", pass: "", passCon: "", img: "" })
 
-  const [response, setResponse] = useState("")
+  const [res, setRes] = useState("")
 
-  const [style, setStyle] = useState("")
-
-  const alreadyExist = "❌ Ya existe un usuario registrado con ese mail."
-
-  const passDoesntMatch = "❌ Las contraseñas no coinciden, intente nuevamente."
-
-  const confirmResponse = "✔ Usuario registrado existosamente."
-
-  const somethingGoesWrong = "❌ Algo sucedió mal, intente nuevamente."
-
-  const negative = "negative"
-
-  const positive = "positive"
+  const [styleComponent, setStyleComponent] = useState("")
 
   const handleInput = (e) => {
     setInput({
@@ -32,23 +22,6 @@ const Register = () => {
       [e.target.name]: e.target.value
     })
   }
-
-  useEffect(() => {
-    const myUsers = collection(db, "users")
-
-    getDocs(myUsers)
-      .then(user => {
-        const newUser = user.docs.map(client => {
-          const data = client.data()
-          return { ...data }
-        })
-        setUsers(newUser)
-      })
-      .catch(() => {
-        setResponse(somethingGoesWrong)
-        setStyle(negative)
-      })
-  }, [])
 
   const compareUser = (mail) => {
     return users.find(user => user.userData.mail == mail)
@@ -59,17 +32,17 @@ const Register = () => {
 
     if (compareUser(input.mail)) {
 
-      setResponse(alreadyExist)
-      setStyle(negative)
+      setRes(alreadyExist)
+      setStyleComponent(negative)
 
     } else if (input.pass.valueOf() != input.passCon.valueOf()) {
 
-      setResponse(passDoesntMatch)
-      setStyle(negative)
+      setRes(passDoesntMatch)
+      setStyleComponent(negative)
 
     } else if ((input.pass.valueOf() === input.passCon.valueOf()) && (input.name.trim() && input.surname.trim() && input.pass.trim() && input.passCon.trim() && input.mail.trim() && input.img.trim())) {
 
-      setResponse(confirmResponse)
+      setRes(confirmResponse)
 
       addDoc(collection(db, "users"), {
         name: input.name,
@@ -80,14 +53,14 @@ const Register = () => {
         like: []
       })
 
-      setStyle(positive)
+      setStyleComponent(positive)
 
       setInput({ name: "", surname: "", pass: "", passCon: "", mail: "", img: "" })
 
     } else {
 
-      setResponse(somethingGoesWrong)
-      setStyle(negative)
+      setRes(response)
+      setStyleComponent(negative)
 
     }
   }
@@ -108,7 +81,9 @@ const Register = () => {
         <button className='btnRegister' type="submit">Enviar</button>
       </form>
 
-      {response && <p className={style}>{response}</p>}
+      <p className={styleComponent}>{res}</p>
+
+      <p className={style}>{response}</p>
 
     </>
   )

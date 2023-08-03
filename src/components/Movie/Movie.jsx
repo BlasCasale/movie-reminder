@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { black, red } from '../../utils/consts'
 import './Movie.css'
 
 
@@ -7,17 +8,13 @@ const Movie = ({ Poster, Title, Type, Year, loged, evaluateLike, imdbID, users }
 
   const [style, setStyle] = useState("")
 
-  const black = "black"
-
-  const red = "red"
-
   const putStyle = () => {
 
-    if (loged){
+    if (loged) {
       const user = users.find(user => user.mail === loged.mail)
-  
+
       const findMovie = user.like.find(movie => movie.imdbID === imdbID)
-  
+
       if (findMovie) {
         return setStyle(red)
       } else {
